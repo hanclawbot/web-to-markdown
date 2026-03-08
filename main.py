@@ -72,7 +72,8 @@ async def convert_url(request: URLRequest):
     except requests.exceptions.RequestException as e:
         raise HTTPException(status_code=400, detail=f"无法获取网页: {str(e)}")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"转换失败: {str(e)}")
+        import traceback
+        raise HTTPException(status_code=500, detail=f"转换失败: {str(e)}\n{traceback.format_exc()}")
 
 if __name__ == "__main__":
     import uvicorn
