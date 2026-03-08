@@ -28,6 +28,11 @@ def clean_html(html_content):
     for tag in soup.find_all(True):
         classes = tag.get('class', [])
         ids = tag.get('id', [])
+        # 確保 class 和 id 都是列表
+        if isinstance(classes, str):
+            classes = [classes]
+        if isinstance(ids, str):
+            ids = [ids]
         combined = ' '.join(classes + ids).lower()
         if any(word in combined for word in ['ad', 'advertisement', 'banner', 'sidebar', 'menu', 'comment', 'social', 'share']):
             tag.decompose()
