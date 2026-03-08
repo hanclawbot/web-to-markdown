@@ -26,6 +26,8 @@ def clean_html(html_content):
     
     # 移除带有广告相关的 class 或 id
     for tag in soup.find_all(True):
+        if tag is None:
+            continue
         classes = tag.get('class', []) or []
         ids = tag.get('id', []) or []
         # 確保 class 和 id 都是列表
